@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/dsk2612-git/jenkins_ci-cd.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'echo "No build step for Python app"'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'echo "No tests included yet"'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t flask-jenkins-app .'
+            }
+        }
+
+        stage('Docker Run') {
+            steps {
+                sh 'docker run -d -p 5000:5000 flask-jenkins-app'
+            }
+        }
+    }
+}
+
